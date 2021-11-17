@@ -155,6 +155,7 @@ MonoBehaviour:
   MaxHealth: 100
   IsCurrentHealthMaxHealth: 1
   CurrentHealth: 0
+  Healthbar: {fileID: 0}
   Speed: 10
   Damage: 10
   LifeTime: 3

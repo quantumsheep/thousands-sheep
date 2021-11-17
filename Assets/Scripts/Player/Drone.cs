@@ -11,6 +11,8 @@ public class Drone : MonoBehaviour
 
     public float AttacksPerSecond = 1.0f;
 
+    public GameObject ExplosionPrefab;
+
     public GameObject ProjectilePrefab;
     public Collider2D PlayerCollider;
 
@@ -49,13 +51,23 @@ public class Drone : MonoBehaviour
 
             if (closestCollider != null)
             {
-                var projectileGameObject = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
-                var projectile = projectileGameObject.GetComponent<ProjectileEntity>();
-
-                projectile.SetDirection((closestCollider.transform.position - transform.position).normalized);
-                projectile.IgnoreCollider(PlayerCollider);
+                Shoot(closestCollider.transform.position);
             }
         }
+    }
+
+    private void Shoot(Vector3 targetPosition)
+    {
+        var direction = (targetPosition - transform.position).normalized;
+
+        var rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.AngleAxis(rotationAngle - 90f, Vector3.forward));
+
+        var projectileGameObject = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
+        var projectile = projectileGameObject.GetComponent<ProjectileEntity>();
+
+        projectile.SetDirection(direction);
+        projectile.IgnoreCollider(PlayerCollider);
     }
 
     private void OnDrawGizmos()

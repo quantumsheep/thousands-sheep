@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour
     public bool IsCurrentHealthMaxHealth = true;
     [DisableIf("IsCurrentHealthMaxHealth")]
     public float CurrentHealth;
+    public EntityHealthbar Healthbar;
 
     protected Rigidbody2D _rigidbody;
 
@@ -25,6 +26,11 @@ public class Entity : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             Die();
+        }
+
+        if (Healthbar != null)
+        {
+            Healthbar.UpdateHealth(CurrentHealth, MaxHealth);
         }
     }
 

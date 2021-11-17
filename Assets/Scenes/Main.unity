@@ -291,6 +291,7 @@ MonoBehaviour:
   MaxHealth: 9000
   IsCurrentHealthMaxHealth: 1
   CurrentHealth: 0
+  Healthbar: {fileID: 0}
   SpawnsPerSecond: 0.5
   SpawnRange: 10
   EntityPrefab: {fileID: 32067822765113911, guid: e7422f4252e2b477b8a887ef86887284, type: 3}
@@ -49735,6 +49736,7 @@ MonoBehaviour:
   MaxHealth: 100
   IsCurrentHealthMaxHealth: 1
   CurrentHealth: 0
+  Healthbar: {fileID: 0}
   Speed: 10
 --- !u!50 &1489294682
 Rigidbody2D:
@@ -50016,7 +50018,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000217e9a48
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
