@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class GoblinBrain : HostileEntity
+public class SheepBrain : HostileEntity
 {
     public float Speed = 10.0f;
 
@@ -19,13 +19,15 @@ public class GoblinBrain : HostileEntity
     private int _targetLayerMask = 0;
     public Entity _target = null;
 
+    public GameObject SpriteGameObject;
+
     private float _lastAttackTime = 0.0f;
 
     public override void Awake()
     {
         base.Awake();
 
-        Name = "Goblin";
+        Name = "Sheep";
 
         foreach (var index in TargetLayerMaskIndexes)
         {
@@ -49,6 +51,9 @@ public class GoblinBrain : HostileEntity
         if (_target)
         {
             var direction = (_target.transform.position - transform.position).normalized;
+
+            SpriteGameObject.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward);
+
             if (Vector3.Distance(transform.position, _target.transform.position) > AttackRange)
             {
                 var velocity = direction * Speed;

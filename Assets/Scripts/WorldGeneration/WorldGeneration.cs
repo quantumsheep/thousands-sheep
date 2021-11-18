@@ -89,24 +89,24 @@ public class WorldGeneration : MonoBehaviour
                 var tile = GroundTiles[UnityEngine.Random.Range(0, GroundTiles.Count)];
                 _layers[WorldLayerType.Ground].SetTile(worldX, worldY, tile);
 
-                if (RidgedPerlin(worldX, worldY, PathScale, PathOctaves, PathAmplitude) > 0.5f)
+                // if (RidgedPerlin(worldX, worldY, PathScale, PathOctaves, PathAmplitude) > 0.5f)
+                // {
+                //     tile = PathTiles[UnityEngine.Random.Range(0, PathTiles.Count)];
+                //     _layers[WorldLayerType.Path].SetTile(worldX, worldY, tile);
+                // }
+                // else
+                // {
+                if (UnityEngine.Random.Range(0, 100) < 10)
                 {
-                    tile = PathTiles[UnityEngine.Random.Range(0, PathTiles.Count)];
-                    _layers[WorldLayerType.Path].SetTile(worldX, worldY, tile);
+                    tile = VegetationTiles[UnityEngine.Random.Range(0, VegetationTiles.Count)];
+                    _layers[WorldLayerType.Vegetation].SetTile(worldX, worldY, tile);
                 }
-                else
+                else if (UnityEngine.Random.Range(0, 300) < 10)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < 10)
-                    {
-                        tile = VegetationTiles[UnityEngine.Random.Range(0, VegetationTiles.Count)];
-                        _layers[WorldLayerType.Vegetation].SetTile(worldX, worldY, tile);
-                    }
-                    else if (UnityEngine.Random.Range(0, 300) < 10)
-                    {
-                        tile = RocksTiles[UnityEngine.Random.Range(0, RocksTiles.Count)];
-                        _layers[WorldLayerType.Rocks].SetTile(worldX, worldY, tile);
-                    }
+                    tile = RocksTiles[UnityEngine.Random.Range(0, RocksTiles.Count)];
+                    _layers[WorldLayerType.Rocks].SetTile(worldX, worldY, tile);
                 }
+                // }
             }
         }
     }
