@@ -50,11 +50,7 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage(float damage, Vector2 knockback)
     {
         CurrentHealth -= damage;
-
-        if (knockback != Vector2.zero)
-        {
-            _rigidbody.AddForce(knockback, ForceMode2D.Impulse);
-        }
+        _rigidbody.AddForce(knockback, ForceMode2D.Impulse);
     }
 
     public virtual void Die()

@@ -16921,7 +16921,7 @@ MonoBehaviour:
   PlayerCollider: {fileID: 1489294683}
   RotationSpeed: 180
   Radius: 3
-  DroneCount: 5
+  DroneCount: 10
   DronePrefab: {fileID: 2099249513971355853, guid: 6ba5389ff06f94c7db5aa9daec5c446c, type: 3}
 --- !u!1001 &6271999186154208958
 PrefabInstance:
@@ -16976,7 +16976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6271999186678030623, guid: 36aa2428bad524bc390704139f62abd9, type: 3}
       propertyPath: Name
-      value: Spawner
+      value: Anomaly
       objectReference: {fileID: 0}
     - target: {fileID: 6271999186678030623, guid: 36aa2428bad524bc390704139f62abd9, type: 3}
       propertyPath: Title
@@ -16994,5 +16994,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 6271999187161959603, guid: 36aa2428bad524bc390704139f62abd9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2120809600, guid: 35e158dfea246422cadb1083274ff116, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36aa2428bad524bc390704139f62abd9, type: 3}

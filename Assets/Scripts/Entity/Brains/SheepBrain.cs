@@ -96,6 +96,9 @@ public class SheepBrain : HostileEntity
 
         Lvl = Random.Range(minLevel, maxLevel);
 
+        var scale = 1.0f;
+        var addedHealth = 0.0f;
+
         if (rand <= 0.03f)
         {
             Title = "Overpowered";
@@ -103,6 +106,8 @@ public class SheepBrain : HostileEntity
             AttackDamage = Random.Range(20f, 30f);
             AttacksPerSecond = Random.Range(2f, 3f);
             Knockback = Random.Range(4.0f, 10.0f);
+            scale = Random.Range(4f, 5f);
+            addedHealth = Random.Range(30f, 40f);
         }
         else if (rand <= 0.06f)
         {
@@ -111,14 +116,8 @@ public class SheepBrain : HostileEntity
             AttackDamage = Random.Range(15f, 25f);
             AttacksPerSecond = Random.Range(1.5f, 2.5f);
             Knockback = Random.Range(2.0f, 5.0f);
-        }
-        else if (rand <= 0.09f)
-        {
-            Title = "Average";
-            Speed = Random.Range(8f, 12f);
-            AttackDamage = Random.Range(10f, 15f);
-            AttacksPerSecond = Random.Range(1.0f, 1.5f);
-            Knockback = Random.Range(1.0f, 3.0f);
+            scale = Random.Range(2f, 4f);
+            addedHealth = Random.Range(20f, 30f);
         }
         else if (rand <= 0.12f)
         {
@@ -126,7 +125,9 @@ public class SheepBrain : HostileEntity
             Speed = Random.Range(5f, 8f);
             AttackDamage = Random.Range(5f, 10f);
             AttacksPerSecond = Random.Range(0.5f, 1.0f);
-            Knockback = Random.Range(0.5f, 2.0f);
+            Knockback = Random.Range(1f, 2.0f);
+            scale = Random.Range(1f, 2f);
+            addedHealth = Random.Range(-10f, -5f);
         }
         else if (rand <= 0.15f)
         {
@@ -135,6 +136,8 @@ public class SheepBrain : HostileEntity
             AttackDamage = Random.Range(5f, 10f);
             AttacksPerSecond = Random.Range(0.0f, 0.5f);
             Knockback = Random.Range(0.5f, 1.0f);
+            scale = Random.Range(0.5f, 1f);
+            addedHealth = Random.Range(-20f, -15f);
         }
         else
         {
@@ -144,5 +147,13 @@ public class SheepBrain : HostileEntity
         Speed += (Lvl * 0.5f);
         AttackDamage += (Lvl * 0.5f);
         AttacksPerSecond += (Lvl * 0.1f);
+        CurrentHealth += addedHealth;
+
+        if (CurrentHealth > MaxHealth)
+        {
+            MaxHealth = CurrentHealth;
+        }
+
+        transform.localScale *= scale;
     }
 }
