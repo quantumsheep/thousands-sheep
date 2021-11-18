@@ -25,6 +25,8 @@ public class GoblinBrain : HostileEntity
     {
         base.Awake();
 
+        Name = "Goblin";
+
         foreach (var index in TargetLayerMaskIndexes)
         {
             _targetLayerMask |= 1 << index;
@@ -79,5 +81,63 @@ public class GoblinBrain : HostileEntity
         }
 
         return closestCollider?.GetComponent<Entity>();
+    }
+
+    public override void RandomizeAttributes(int minLevel, int maxLevel)
+    {
+        base.RandomizeAttributes(minLevel, maxLevel);
+
+        var rand = Random.Range(0f, 100f);
+
+        Lvl = Random.Range(minLevel, maxLevel);
+
+        if (rand <= 0.03f)
+        {
+            Title = "Overpowered";
+            Speed = Random.Range(12f, 20f);
+            AttackDamage = Random.Range(20f, 30f);
+            AttacksPerSecond = Random.Range(2f, 3f);
+            Knockback = Random.Range(4.0f, 10.0f);
+        }
+        else if (rand <= 0.06f)
+        {
+            Title = "Powerful";
+            Speed = Random.Range(10f, 15f);
+            AttackDamage = Random.Range(15f, 25f);
+            AttacksPerSecond = Random.Range(1.5f, 2.5f);
+            Knockback = Random.Range(2.0f, 5.0f);
+        }
+        else if (rand <= 0.09f)
+        {
+            Title = "Average";
+            Speed = Random.Range(8f, 12f);
+            AttackDamage = Random.Range(10f, 15f);
+            AttacksPerSecond = Random.Range(1.0f, 1.5f);
+            Knockback = Random.Range(1.0f, 3.0f);
+        }
+        else if (rand <= 0.12f)
+        {
+            Title = "Weak";
+            Speed = Random.Range(5f, 8f);
+            AttackDamage = Random.Range(5f, 10f);
+            AttacksPerSecond = Random.Range(0.5f, 1.0f);
+            Knockback = Random.Range(0.5f, 2.0f);
+        }
+        else if (rand <= 0.15f)
+        {
+            Title = "Unpowered";
+            Speed = Random.Range(3f, 5f);
+            AttackDamage = Random.Range(5f, 10f);
+            AttacksPerSecond = Random.Range(0.0f, 0.5f);
+            Knockback = Random.Range(0.5f, 1.0f);
+        }
+        else
+        {
+            Title = "";
+        }
+
+        Speed += (Lvl * 0.5f);
+        AttackDamage += (Lvl * 0.5f);
+        AttacksPerSecond += (Lvl * 0.1f);
     }
 }

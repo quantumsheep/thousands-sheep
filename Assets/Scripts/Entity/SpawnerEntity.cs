@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class SpawnerEntity : Entity
@@ -8,6 +9,9 @@ public class SpawnerEntity : Entity
     public float SpawnRange = 10f;
 
     public GameObject EntityPrefab;
+
+    [MinMaxSlider(0, 100)]
+    public Vector2Int Level = new Vector2Int(1, 10);
 
     private float _lastSpawnTime = 0f;
 
@@ -26,5 +30,8 @@ public class SpawnerEntity : Entity
     {
         var spawnPosition = transform.position + Random.insideUnitSphere * SpawnRange;
         var spawn = Instantiate(EntityPrefab, spawnPosition, Quaternion.identity);
+
+        var entity = spawn.GetComponent<Entity>();
+        entity.RandomizeAttributes(Level.x, Level.y);
     }
 }

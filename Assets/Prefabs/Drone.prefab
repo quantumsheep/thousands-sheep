@@ -99,7 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectionRange: 10
   DetectionLayerMaskIndexes: 07000000
-  AttacksPerSecond: 2
+  AttacksPerSecond: 10
   ExplosionPrefab: {fileID: 8633246705129666509, guid: 7d63ee243c07b481ba53648031d29577, type: 3}
   ProjectilePrefab: {fileID: 2700985063089483042, guid: 7a7893330d868401a99b0b18d713f5b9, type: 3}
   PlayerCollider: {fileID: 0}
+  IsShooting: 0
+  TargetPosition: {x: 0, y: 0, z: 0}

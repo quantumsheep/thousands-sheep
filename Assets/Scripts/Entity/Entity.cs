@@ -6,6 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Entity : MonoBehaviour
 {
+    public int Lvl = 0;
+    public string Name = "";
+    public string Title = "";
+
+    public EntityIdentity Identity;
+
     public float MaxHealth = 100f;
     public bool IsCurrentHealthMaxHealth = true;
     [DisableIf("IsCurrentHealthMaxHealth")]
@@ -21,6 +27,14 @@ public class Entity : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
+    public virtual void Start()
+    {
+        if (Identity != null)
+        {
+            Identity.UpdateIdentity(Lvl, Name, Title);
+        }
+    }
+
     public virtual void Update()
     {
         if (CurrentHealth <= 0)
@@ -33,7 +47,6 @@ public class Entity : MonoBehaviour
             Healthbar.UpdateHealth(CurrentHealth, MaxHealth);
         }
     }
-
     public virtual void TakeDamage(float damage, Vector2 knockback)
     {
         CurrentHealth -= damage;
@@ -48,4 +61,6 @@ public class Entity : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public virtual void RandomizeAttributes(int minLevel, int maxLevel) { }
 }

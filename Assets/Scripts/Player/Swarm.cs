@@ -24,6 +24,14 @@ public class Swarm : MonoBehaviour
         transform.Rotate(Vector3.forward * (RotationSpeed * Time.deltaTime));
     }
 
+    public void SetIsShooting(bool isShooting, Vector3 direction)
+    {
+        foreach (var drone in _drones)
+        {
+            drone.SetIsShooting(isShooting, direction);
+        }
+    }
+
     [Button]
     void UpdateDrones()
     {

@@ -16,6 +16,9 @@ public class Drone : MonoBehaviour
     public GameObject ProjectilePrefab;
     public Collider2D PlayerCollider;
 
+    public bool IsShooting = false;
+    public Vector3 TargetDirection;
+
     private int _detectionLayerMask = 0;
     private float _lastAttackTime = 0.0f;
 
@@ -29,39 +32,24 @@ public class Drone : MonoBehaviour
 
     void Update()
     {
-        if (AttacksPerSecond >= 0.0f && ((Time.time - _lastAttackTime) > (1.0f / AttacksPerSecond)))
+        if (IsShooting && AttacksPerSecond >= 0.0f && ((Time.time - _lastAttackTime) > (1.0f / AttacksPerSecond)))
         {
             _lastAttackTime = Time.time;
 
-            var colliders = Physics2D.OverlapCircleAll(transform.position, DetectionRange, _detectionLayerMask);
-
-            Collider2D closestCollider = null;
-            float closestDistance = float.MaxValue;
-
-            foreach (var collider in colliders)
-            {
-                var distance = Vector2.Distance(transform.position, collider.transform.position);
-
-                if (distance < closestDistance)
-                {
-                    closestCollider = collider;
-                    closestDistance = distance;
-                }
-            }
-
-            if (closestCollider != null)
-            {
-                Shoot(closestCollider.transform.position);
-            }
+            Shoot(TargetDirection);
         }
     }
 
-    private void Shoot(Vector3 targetPosition)
+    public void SetIsShooting(bool isShooting, Vector3 targetDirection)
     {
-        var direction = (targetPosition - transform.position).normalized;
+        IsShooting = isShooting;
+        TargetDirection = targetDirection;
+    }
 
-        var rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Instantiate(ExplosionPrefab, transform.position, Quaternion.AngleAxis(rotationAngle - 90f, Vector3.forward));
+    private void Shoot(Vector3 direction)
+    {
+        // var rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // Instantiate(ExplosionPrefab, transform.position, Quaternion.AngleAxis(rotationAngle - 90f, Vector3.forward));
 
         var projectileGameObject = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
         var projectile = projectileGameObject.GetComponent<ProjectileEntity>();
