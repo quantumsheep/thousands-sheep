@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Settings/Scenes/2D URP Scene Template.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Web3Unity/Scenes/WalletLogin.unity
+    guid: cc28e1075e9584f1698219d041278648
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: c8fde68b8a0c443039c99ec7462652b4
   m_configObjects: {}

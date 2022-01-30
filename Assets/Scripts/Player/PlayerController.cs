@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : Entity
@@ -10,6 +11,34 @@ public class PlayerController : Entity
     public Swarm Swarm;
     public Camera PlayerCamera;
     public GameObject SpriteGameObject;
+
+    public GameObject DronePrefab;
+
+    private CryptoDronesContract _contract;
+
+    public override async void Start()
+    {
+        base.Start();
+
+        _contract = new CryptoDronesContract(PlayerPrefs.GetString("Account"), PlayerPrefs.GetString("Contract"));
+
+        var drones = await _contract.GetDrones();
+
+        foreach (var drone in drones)
+        {
+            Debug.Log($"Drone #{drone.id}: elements = [{string.Join(", ", drone.elements)}], speed = {drone.attacksPerSecond}, damages = {drone.attackDamages}, range = {drone.attackRange}");
+
+            var droneGameObject = Instantiate(DronePrefab, Vector3.zero, Quaternion.identity, Swarm.transform);
+            var droneComponent = droneGameObject.GetComponent<Drone>();
+            droneComponent.AttacksPerSecond = drone.attacksPerSecond;
+            droneComponent.BaseAttackDamages = drone.attackDamages;
+            droneComponent.BaseAttackRange = drone.attackRange;
+
+            Swarm.AddDrone(droneComponent);
+        }
+
+        Swarm.UpdateDrones();
+    }
 
     public override void Update()
     {
